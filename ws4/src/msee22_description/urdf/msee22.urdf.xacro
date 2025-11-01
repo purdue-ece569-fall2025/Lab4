@@ -4,10 +4,10 @@
   <!-- Use this if parameters are set from the launch file, otherwise delete -->
   <xacro:arg name="prefix" default="" />
 
-  <xacro:include filename="$(find msee22_description)/urdf/common/inertials.xacro"/>
-  <xacro:include filename="$(find msee22_description)/urdf/common/materials.xacro"/>
-  <xacro:include filename="$(find table_description)/urdf/table/table_macro.xacro" />
-  <xacro:include filename="$(find wall_description)/urdf/wall/wall_macro.xacro" />
+  <xacro:include filename="$(find msee22_description)/urdf/inertials.xacro"/>
+  <xacro:include filename="$(find msee22_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find table_description)/urdf/table_macro.xacro" />
+  <xacro:include filename="$(find wall_description)/urdf/wall_macro.xacro" />
   <xacro:include filename="$(find ur_description)/urdf/ur_macro.xacro" />
 
   <!-- ROBOT ARGUMENTS -->
@@ -30,7 +30,6 @@
   <xacro:arg name="safety_limits" default="false" />
   <xacro:arg name="safety_pos_margin" default="0.15" />
   <xacro:arg name="safety_k_position" default="20" />
-  <!-- ros2_control related parameters -->
   <xacro:arg name="headless_mode" default="false" />
   <xacro:arg name="robot_ip" default="0.0.0.0" />
   <xacro:arg name="script_filename" default="" />
@@ -41,7 +40,6 @@
   <xacro:arg name="reverse_port" default="50001" />
   <xacro:arg name="script_sender_port" default="50002" />
   <xacro:arg name="trajectory_port" default="50003" />
-  <!--   tool communication related parameters-->
   <xacro:arg name="use_tool_communication" default="false" />
   <xacro:arg name="tool_voltage" default="0" />
   <xacro:arg name="tool_parity" default="0" />
@@ -51,19 +49,13 @@
   <xacro:arg name="tool_tx_idle_chars" default="3.5" />
   <xacro:arg name="tool_device_name" default="/tmp/ttyUR" />
   <xacro:arg name="tool_tcp_port" default="54321" />
-
-  <!-- Simulation parameters -->
   <xacro:arg name="use_fake_hardware" default="false" />
   <xacro:arg name="fake_sensor_commands" default="false" />
   <xacro:arg name="sim_gazebo" default="false" />
   <xacro:arg name="sim_ignition" default="false" />
   <xacro:arg name="simulation_controllers" default="" />
-
-  <!-- initial position for simulations (Fake Hardware, Gazebo, Ignition) -->
   <xacro:arg name="initial_positions_file"
     default="$(find ur_description)/config/initial_positions.yaml" />
-
-  <!-- convert to property to use substitution in function -->
   <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)" />
 
   <!-- END ROBOT ARGUMENTS -->
@@ -92,9 +84,17 @@
   <xacro:wall prefix="wall2_" parent="world" length="5" thickness="0.5" height="3" material="black">
     <origin xyz="${table_length/2 + 3*inch} ${table_length/2} 0 " rpy="0 0 ${radians(-90)}"/> <!-- position wall in the world -->
   </xacro:wall>
+  
 
-  <!-- arm -->
-  <xacro:ur_robot
+  <!-- if using jazzy, uncomment the lines 91-93 -->
+
+   <xacro:ur_robot name="$(arg name)" tf_prefix="$(arg tf_prefix)" parent="table_top" joint_limits_parameters_file="$(arg joint_limit_params)" kinematics_parameters_file="$(arg kinematics_params)" physical_parameters_file="$(arg physical_params)" visual_parameters_file="$(arg visual_params)" safety_limits="$(arg safety_limits)" safety_pos_margin="$(arg safety_pos_margin)" safety_k_position="$(arg safety_k_position)">
+     <origin xyz="0 ${7.5*inch} ${1*inch}" rpy="0 0 ${-radians(135)}" />  
+  </xacro:ur_robot>
+
+  <!-- if using humble, uncomment the lines 97-136 -->
+
+  <!-- <xacro:ur_robot
     name="$(arg name)"
     tf_prefix="$(arg tf_prefix)"
     parent="table_top"
@@ -131,7 +131,6 @@
     script_sender_port="$(arg script_sender_port)"
     trajectory_port="$(arg trajectory_port)"
   >
-  <!-- position of robot on the table -->
   <origin xyz="0 ${7.5*inch} ${1*inch}" rpy="0 0 ${-radians(135)}" />  
-  </xacro:ur_robot>
+  </xacro:ur_robot> -->
 </robot>

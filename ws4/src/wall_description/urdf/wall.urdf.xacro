@@ -4,9 +4,9 @@
   <!-- Use this if parameters are set from the launch file, otherwise delete -->
   <xacro:arg name="prefix" default="" />
 
-  <xacro:include filename="$(find wall_description)/urdf/common/inertials.xacro" />
-  <xacro:include filename="$(find wall_description)/urdf/common/materials.xacro" />
-  <xacro:include filename="$(find wall_description)/urdf/wall/wall_macro.xacro"/>
+  <xacro:include filename="$(find wall_description)/urdf/inertials.xacro" />
+  <xacro:include filename="$(find wall_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find wall_description)/urdf/wall_macro.xacro"/>
 
   <!-- create link fixed to the "world" -->
   <link name="world" />

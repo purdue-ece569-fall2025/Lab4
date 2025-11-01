@@ -4,9 +4,9 @@
   <!-- Use this if parameters are set from the launch file, otherwise delete -->
   <xacro:arg name="prefix" default="" />
 
-  <xacro:include filename="$(find table_description)/urdf/common/inertials.xacro" />
-  <xacro:include filename="$(find table_description)/urdf/common/materials.xacro" />
-  <xacro:include filename="$(find table_description)/urdf/table/table_macro.xacro" />
+  <xacro:include filename="$(find table_description)/urdf/inertials.xacro" />
+  <xacro:include filename="$(find table_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find table_description)/urdf/table_macro.xacro" />
 
   <!-- create link fixed to the "world" -->
   <link name="world" />
