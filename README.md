@@ -19,12 +19,12 @@ cd Universal_Robots_ROS2_Description
 ```
 Then checkout the `humble` or `jazzy` branch, depending on which version of ROS you are using. For example:
 ```bash
-git checkout origin/humble 
+git checkout origin/jazzy 
 ```
 
 #### Instructions for all users
 
-For all students, you will need to first edit `ws4/src/msee22_description/urdf/msee22.urdf.xacro` depending on if you use humble or jazzy. Follow the instructions on lines 89 and 95.
+For all students, you will need to first edit `ws4/src/msee22_description/urdf/msee22.urdf.xacro` if you use humble (for jazzy, you can ignore this step). Follow the instructions on lines 89 and 95.
 
 Then, build all packages. If you get an error, look for the Lab 4 update thread on Piazza - there might be a solution already posted there to your particular problem.
 ```bash
